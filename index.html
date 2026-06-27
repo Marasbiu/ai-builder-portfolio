@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samara Garcia — AI Builder Portfolio</title>
+  <!-- Instrument Serif (display) + DM Sans (UI) — Google Fonts only -->
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── DESIGN TOKENS — l1-morning-design ──────────────────── */
+    :root {
+      --ink:       #131d28;
+      --near-blk:  #0e151c;
+      --white:     #ffffff;
+      --orange:    #fc7a3b;
+      --electric:  #3898ec;
+      --ocean:     #0d599c;
+      --lime:      #7fd852;
+      --off-white: #f8f7f6;
+      --linen:     #f1f0ed;
+      --cream:     #faf9f5;
+      --taupe:     #cac4ba;
+      --stone:     #6c6b6a;
+
+      --serif: 'Instrument Serif', 'Times New Roman', serif;
+      --sans:  'DM Sans', -apple-system, 'Segoe UI', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      background: var(--ink);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px;
+    }
+
+    .nav-logo {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex; gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: var(--ink);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 28px 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 5%; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse, rgba(252,122,59,0.10) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(252,122,59,0.35);
+      background: rgba(252,122,59,0.07);
+      border-radius: 3px;
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: blink 2.2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.8rem, 9.5vw, 7.5rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      text-transform: capitalize;
+    }
+
+    .hero-title .orange { color: var(--orange); }
+
+    .hero-name {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--taupe);
+      letter-spacing: 0.06em;
+      margin-top: 1.5rem;
+    }
+
+    .hero-name strong {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .hero-cta {
+      display: flex; gap: 0.875rem; flex-wrap: wrap; justify-content: center;
+      margin-top: 2.75rem;
+    }
+
+    /* ── BUTTONS ─────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      padding: 13px 26px;
+      border-radius: 10px;
+    }
+
+    .btn-primary:hover { background: #e8692a; transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.75);
+      padding: 12px 26px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 0;
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.45); color: var(--white); }
+
+    /* ── SECTION WRAPPERS ────────────────────────────────────── */
+    .section-wrap { padding: 5.5rem 28px; }
+    .bg-white { background: var(--white); }
+    .bg-off   { background: var(--off-white); }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--orange);
+      margin-bottom: 0.85rem;
+    }
+
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(2.1rem, 4.5vw, 3rem);
+      font-weight: 400;
+      line-height: 1;
+      text-transform: capitalize;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────── */
+    .about-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--stone);
+      max-width: 640px;
+    }
+
+    .about-text strong { color: var(--ink); font-weight: 600; }
+
+    /* ── WORK ────────────────────────────────────────────────── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(276px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .work-card {
+      background: var(--white);
+      border: 1px solid var(--taupe);
+      padding: 1.75rem;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+
+    .work-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+
+    .work-icon {
+      width: 40px; height: 40px;
+      background: rgba(252,122,59,0.07);
+      border: 1px solid rgba(252,122,59,0.2);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .work-card h3 {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      line-height: 1.25;
+    }
+
+    .work-card p {
+      font-size: 0.875rem;
+      color: var(--stone);
+      line-height: 1.65;
+    }
+
+    /* ── PROJECT GRID ────────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--taupe);
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+
+    .project-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+
+    .project-card-header {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    }
+
+    .project-tag {
+      display: inline-flex;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tag-coming { background: var(--linen); color: var(--stone); }
+    .tag-built  { background: rgba(127,216,82,0.12); color: #4a9e25; border: 1px solid rgba(127,216,82,0.3); }
+
+    .project-card h3 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .project-card p {
+      font-size: 0.845rem;
+      color: var(--stone);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .project-links {
+      display: flex; gap: 1rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid var(--linen);
+    }
+
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--stone);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      background: none; border: none;
+      font-family: var(--sans);
+      padding: 0;
+      transition: color 0.15s;
+    }
+
+    .project-link:hover { color: var(--orange); }
+    .project-link svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      padding: 4.5rem 28px;
+      text-align: center;
+    }
+
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+
+    footer h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 400;
+      color: var(--white);
+      text-transform: capitalize;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-sub {
+      font-size: 0.875rem;
+      color: var(--taupe);
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      color: var(--taupe);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.15s;
+    }
+
+    .contact-link:hover { color: var(--orange); }
+
+    .footer-copy {
+      margin-top: 3rem;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── MODAL ───────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(13,29,40,0.65);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--white);
+      border: 1px solid var(--taupe);
+      max-width: 620px;
+      width: 100%;
+      max-height: 86vh;
+      display: flex; flex-direction: column;
+      transform: translateY(18px);
+      transition: transform 0.25s;
+      overflow: hidden;
+    }
+
+    .modal-overlay.open .modal { transform: translateY(0); }
+
+    .modal-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 1.6rem 1.75rem 1.25rem;
+      border-bottom: 1px solid var(--linen);
+      flex-shrink: 0;
+    }
+
+    .modal-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--orange);
+      margin-bottom: 0.3rem;
+    }
+
+    .modal-header h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .modal-close {
+      width: 28px; height: 28px;
+      background: var(--linen);
+      border: none;
+      cursor: pointer;
+      color: var(--stone);
+      font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s, color 0.15s;
+      font-family: var(--sans);
+    }
+
+    .modal-close:hover { background: var(--taupe); color: var(--ink); }
+
+    .modal-body {
+      overflow-y: auto;
+      padding: 1.75rem;
+      flex: 1;
+    }
+
+    .modal-body::-webkit-scrollbar { width: 4px; }
+    .modal-body::-webkit-scrollbar-track { background: var(--linen); }
+    .modal-body::-webkit-scrollbar-thumb { background: var(--taupe); }
+
+    /* ── EMPTY STATE ─────────────────────────────────────────── */
+    .empty-state {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 150px; text-align: center; gap: 0.65rem;
+      border: 1px dashed var(--taupe);
+      padding: 2.5rem;
+    }
+
+    .empty-icon { font-size: 1.75rem; opacity: 0.35; }
+    .empty-text { font-size: 0.9rem; color: var(--stone); }
+    .empty-sub  { font-size: 0.78rem; color: var(--taupe); }
+
+    /* ── STEP LIST ───────────────────────────────────────────── */
+    .steps { display: flex; flex-direction: column; }
+
+    .step {
+      display: flex; gap: 1.1rem;
+      padding-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 16px; top: 34px; bottom: 0;
+      width: 2px;
+      background: var(--linen);
+    }
+
+    .step-num {
+      width: 33px; height: 33px;
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+
+    .step-text { padding-top: 0.35rem; }
+
+    .step-text h4 {
+      font-family: var(--serif);
+      font-size: 0.98rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .step-text p {
+      font-size: 0.845rem;
+      color: var(--stone);
+      line-height: 1.65;
+    }
+
+    .step-text code {
+      font-family: monospace;
+      font-size: 0.82em;
+      background: var(--linen);
+      color: var(--ink);
+      padding: 0.1em 0.4em;
+      border-radius: 2px;
+    }
+
+    /* ── DS DOCS ─────────────────────────────────────────────── */
+    .ds-doc { display: flex; flex-direction: column; gap: 2rem; }
+
+    .ds-section-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--ink);
+      text-transform: capitalize;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--linen);
+      margin-bottom: 1rem;
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .swatch-color {
+      height: 46px;
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .swatch-name {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-top: 0.4rem;
+    }
+
+    .swatch-hex {
+      display: block;
+      font-family: monospace;
+      font-size: 0.68rem;
+      color: var(--stone);
+    }
+
+    .type-samples { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .type-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem;
+      background: var(--off-white);
+    }
+
+    .type-row .sample { flex: 1; line-height: 1; }
+
+    .type-meta {
+      font-family: monospace;
+      font-size: 0.67rem;
+      color: var(--stone);
+      white-space: nowrap;
+    }
+
+    .layout-principles { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .principle {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.7rem 0.85rem;
+      background: var(--off-white);
+      font-size: 0.845rem;
+      color: var(--stone);
+    }
+
+    .principle::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+    .principle strong { color: var(--ink); }
+
+    .vibe-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .vibe-tag {
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--orange);
+      color: var(--orange);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    /* ── PORTFOLIO DOCS ──────────────────────────────────────── */
+    .portfolio-docs { display: flex; flex-direction: column; gap: 2rem; }
+
+    .docs-list { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .docs-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      padding: 0.65rem 0.85rem;
+      background: var(--off-white);
+      font-size: 0.845rem;
+      color: var(--stone);
+    }
+
+    .docs-item::before { content: '✓'; color: #4a9e25; font-weight: 700; flex-shrink: 0; }
+
+    .prompt-blocks { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .prompt-block {
+      padding: 1rem 1.2rem;
+      background: var(--ink);
+      border-left: 3px solid var(--orange);
+    }
+
+    .prompt-label {
+      font-size: 0.63rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      margin-bottom: 0.4rem;
+    }
+
+    .prompt-text {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────────── -->
+  <nav>
+    <a class="nav-logo" href="#hero">Samara Garcia</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-badge">AI Builder Program</div>
+    <h1 class="hero-title">AI <span class="orange">Builder</span><br>Portfolio</h1>
+    <p class="hero-name">Samara Garcia &nbsp;·&nbsp; <strong>AI Builder</strong></p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        View Projects
+      </a>
+      <a href="#about" class="btn btn-ghost">About Me</a>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ─────────────────────────────────────────────────── -->
+  <div class="section-wrap bg-white" id="about">
+    <div class="section-inner">
+      <p class="section-label">About</p>
+      <h2 class="section-heading">Hi, I'm Samara</h2>
+      <p class="about-text">
+        I build AI-powered tools for decision-making, research, and ops — bringing creative ideas to life. My background is the no-code/low-code stack, who can think in products and ship fast. This site is a living record of everything I make along the way.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── WORK ──────────────────────────────────────────────────── -->
+  <div class="section-wrap bg-off" id="work">
+    <div class="section-inner">
+      <p class="section-label">What I'm Working On</p>
+      <h2 class="section-heading">Current Focus</h2>
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-icon">🧠</div>
+          <h3>AI Tools for Product Planning & Strategy</h3>
+          <p>Using AI to speed up research, roadmaps, and decision-making — so I can spend less time on process and more time on thinking.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-icon">⚡</div>
+          <h3>Workflow Automation</h3>
+          <p>Building automated processes and scheduled tasks that handle repetitive work — from file organization to email management.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-icon">🛠️</div>
+          <h3>Custom AI Skills & Tools</h3>
+          <p>Creating reusable skills, voice guides, and context files that make AI assistants more capable and tailored to the way I work.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AI PROJECTS ────────────────────────────────────────────── -->
+  <div class="section-wrap bg-white" id="projects">
+    <div class="section-inner">
+      <p class="section-label">AI Projects</p>
+      <h2 class="section-heading">Everything I've Built</h2>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────── -->
+  <footer id="contact">
+    <div class="footer-inner">
+      <h2>Let's Connect</h2>
+      <p class="footer-sub">Have a question or want to follow along? Reach out.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:garciabsamara@gmail.com">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          garciabsamara@gmail.com
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/samarabgarcia/" target="_blank" rel="noopener">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/samarabgarcia
+        </a>
+      </div>
+      <p class="footer-copy">© 2026 Samara Garcia · AI Builder Portfolio</p>
+    </div>
+  </footer>
+
+  <!-- ── MODAL ──────────────────────────────────────────────────── -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <p class="modal-type" id="modalType">How I Built This</p>
+          <h3 id="modalTitle">Project</h3>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // ── DESIGN SYSTEM PALETTE (for Card 1 docs) ───────────────
+    const palette = [
+      { name: 'Deep Ink',      hex: '#131d28' },
+      { name: 'Near Black',    hex: '#0e151c' },
+      { name: 'Pure White',    hex: '#ffffff' },
+      { name: 'Burnt Orange',  hex: '#fc7a3b' },
+      { name: 'Electric Blue', hex: '#3898ec' },
+      { name: 'Ocean Blue',    hex: '#0d599c' },
+      { name: 'Lime Green',    hex: '#7fd852' },
+      { name: 'Warm Off-White',hex: '#f8f7f6' },
+      { name: 'Soft Linen',    hex: '#f1f0ed' },
+      { name: 'Warm Cream',    hex: '#faf9f5' },
+      { name: 'Warm Taupe',    hex: '#cac4ba' },
+      { name: 'Stone Gray',    hex: '#6c6b6a' },
+    ];
+
+    function buildDsDocsHTML() {
+      const swatches = palette.map(s =>
+        `<div>
+          <div class="swatch-color" style="background:${s.hex};${s.hex==='#ffffff'?'border:1px solid #cac4ba;':''}"></div>
+          <span class="swatch-name">${s.name}</span>
+          <span class="swatch-hex">${s.hex}</span>
+        </div>`
+      ).join('');
+
+      return `
+        <div class="ds-doc">
+          <div>
+            <p class="ds-section-title">Color Palette</p>
+            <div class="swatches">${swatches}</div>
+          </div>
+          <div>
+            <p class="ds-section-title">Typography</p>
+            <div class="type-samples">
+              <div class="type-row">
+                <span class="sample" style="font-family:'Instrument Serif',serif;font-size:2rem;font-weight:400;color:#131d28;line-height:1;text-transform:capitalize;">Display Heading</span>
+                <span class="type-meta">Instrument Serif · 400 · capitalize · 1:1 lh</span>
+              </div>
+              <div class="type-row">
+                <span class="sample" style="font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:700;color:#131d28;text-transform:uppercase;letter-spacing:0.1em;">Nav Link / Button Label</span>
+                <span class="type-meta">DM Sans · 700 · uppercase · 0.1em ls</span>
+              </div>
+              <div class="type-row">
+                <span class="sample" style="font-family:'DM Sans',sans-serif;font-size:0.875rem;font-weight:400;color:#6c6b6a;line-height:1.6;">Body copy — geometric sans for utility and readability.</span>
+                <span class="type-meta">DM Sans · 400 · 14px</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Layout Principles</p>
+            <div class="layout-principles">
+              <div class="principle"><span><strong>Dark header, light body.</strong> Deep ink nav grounds the page; content sections stay warm and airy.</span></div>
+              <div class="principle"><span><strong>One loud accent.</strong> Only orange (#fc7a3b) is loud — everything else recedes or is neutral.</span></div>
+              <div class="principle"><span><strong>Serif for impact, sans for function.</strong> Never swap roles, never mix within a component.</span></div>
+              <div class="principle"><span><strong>Tight type, generous space.</strong> Headings at 1:1 line-height; breathing room lives at the section level.</span></div>
+              <div class="principle"><span><strong>Max 1272px container, 28px gutters.</strong> Full-bleed sections with centered content inside.</span></div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">The Vibe</p>
+            <div class="vibe-tags">
+              <span class="vibe-tag">Editorial</span>
+              <span class="vibe-tag">Streetwear</span>
+              <span class="vibe-tag">Bold</span>
+              <span class="vibe-tag">Authentic</span>
+              <span class="vibe-tag">Minimal</span>
+              <span class="vibe-tag">Raw</span>
+              <span class="vibe-tag">High-Fashion</span>
+              <span class="vibe-tag">Disciplined</span>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    // ── MODAL CONTENT ──────────────────────────────────────────
+    const content = {
+      'Design System Skill': {
+        how: `<div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>Found an inspiration website</h4>
+              <p>Identified a site with a bold, editorial aesthetic — streetwear energy, high-fashion typography, and a disciplined color palette with a single loud accent. Strong point of view, no noise.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Used Claude in Chrome to extract the design DNA</h4>
+              <p>Opened the site in Chrome with Claude, then asked it to read the actual CSS and document every decision — colors, font names, sizing, spacing, component patterns, and underlying principles.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Used <code>/skill-creator</code> to turn it into a reusable skill</h4>
+              <p>Structured the extracted design DNA as a skill file — a guide Claude reads before touching any CSS. Covers tokens, typography rules, spacing rhythm, component specs, and brand principles.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <h4>Now it works everywhere</h4>
+              <p>Type <code>/l1-morning-design</code> at the start of any build and every project gets the same consistent aesthetic — consistent colors, fonts, and feel across every tool, session, and file.</p>
+            </div>
+          </div>
+        </div>`,
+        docs: buildDsDocsHTML()
+      },
+
+      'Portfolio Website': {
+        how: `<div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>Started with a simple scaffolded HTML page</h4>
+              <p>Gave Claude a clear spec: single self-contained HTML file, specific sections, Google Fonts only, interview me before writing content. The first pass produced a clean foundation to build on.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Applied my design system skill to style it</h4>
+              <p>Invoked <code>/l1-morning-design</code> and told Claude to restyle using that design DNA — ThreadBeast colors, Instrument Serif headings, DM Sans UI, and the dark-header/light-body pattern.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>My AI tool interviewed me to fill in real content</h4>
+              <p>Claude asked the right questions before writing a single word — name, title, about text, work focus, contact info. No placeholders, no Lorem Ipsum. Real content from the start.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <h4>Built out project cards as I completed each AI Builder session</h4>
+              <p>Each build session adds a new card to the grid. The portfolio is a living document — it grows with every project completed. The structure makes it easy to keep adding.</p>
+            </div>
+          </div>
+        </div>`,
+        docs: `<div class="portfolio-docs">
+          <div>
+            <p class="ds-section-title">Techniques Used</p>
+            <div class="docs-list">
+              <div class="docs-item">Single self-contained HTML file — no build tools, no dependencies, works offline</div>
+              <div class="docs-item">CSS custom properties for the full design token system — colors, fonts, spacing</div>
+              <div class="docs-item">JS-rendered project grid from a data array — easy to add new cards without touching HTML</div>
+              <div class="docs-item">Data-driven modal system — each card carries its own popup content per button</div>
+              <div class="docs-item">Google Fonts only (Instrument Serif + DM Sans) — single external resource</div>
+              <div class="docs-item">CSS Grid with auto-fill for a fully responsive layout at any screen size</div>
+              <div class="docs-item">Fixed nav with backdrop-filter blur and smooth anchor scroll</div>
+              <div class="docs-item">Design skill read before any CSS — consistent look across all builds</div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Key Prompts For Building Your Own</p>
+            <div class="prompt-blocks">
+              <div class="prompt-block">
+                <p class="prompt-label">Prompt 1 — Scaffold</p>
+                <p class="prompt-text">"Build me a complete portfolio website as a single self-contained HTML file. Interview me about any information you don't have before building."</p>
+              </div>
+              <div class="prompt-block">
+                <p class="prompt-label">Prompt 2 — Style With Your Design Skill</p>
+                <p class="prompt-text">"Style my portfolio with my design skill. Read /[your-skill-name] before writing any CSS. Google Fonts are the only allowed external resource."</p>
+              </div>
+              <div class="prompt-block">
+                <p class="prompt-label">Prompt 3 — Build Out Cards</p>
+                <p class="prompt-text">"Build out the project cards for [project name]. Add a 'How I Built This' popup and a Documentation popup. Keep all other cards as Coming Soon."</p>
+              </div>
+              <div class="prompt-block">
+                <p class="prompt-label">Prompt 4 — Keep Iterating</p>
+                <p class="prompt-text">"Update the portfolio HTML in my working directory. Add [new project] to the grid with these details: [title, description, steps, docs]."</p>
+              </div>
+            </div>
+          </div>
+        </div>`
+      },
+
+      'Voice Guide Skill': {
+        how: `<div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>Pulled my 40 most recent sent emails</h4>
+              <p>Used the Gmail connector to pull the last 40 emails from my Sent folder — real writing, real context, no synthetic examples. The raw material for everything that follows.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Used Claude to analyze tone, registers, sentence patterns, and rhetorical moves</h4>
+              <p>Fed all 40 emails into Claude and asked it to read for patterns — not just vocabulary, but how I open, close, hedge, emphasize, build rapport, and shift register across different audiences.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Generated a structured 8-section voice guide</h4>
+              <p>Claude synthesized the analysis into a structured document: Core Identity, Registers, Sentence Patterns, Rhetorical Moves, Emotional Register, Do's and Don'ts, Quick Reference, and Calibration Tests.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <h4>Saved it as a humanize-writing skill so Claude can write in my voice on any task</h4>
+              <p>Packaged the voice guide as a <code>humanize-writing</code> skill file. Now any time Claude writes something I'll send, it reads this guide first and matches how I actually sound.</p>
+            </div>
+          </div>
+        </div>`,
+        docs: `<div class="portfolio-docs">
+          <div>
+            <p class="ds-section-title">The 8 Sections of the Voice Guide</p>
+            <div class="docs-list">
+              <div class="docs-item"><strong>Core Identity</strong> — The through-line of my voice: how I come across and what makes it distinctly mine.</div>
+              <div class="docs-item"><strong>Registers</strong> — How I shift tone by audience: formal vs. casual, professional vs. peer.</div>
+              <div class="docs-item"><strong>Sentence Patterns</strong> — Structural habits: length, rhythm, punctuation, how I build momentum.</div>
+              <div class="docs-item"><strong>Rhetorical Moves</strong> — How I persuade, clarify, and connect: analogies, callbacks, emphasis patterns, transitions.</div>
+              <div class="docs-item"><strong>Emotional Register</strong> — How I handle warmth, urgency, and disagreement without sounding performative.</div>
+              <div class="docs-item"><strong>Do's and Don'ts</strong> — Phrases I use, phrases that would never come from me, patterns to avoid.</div>
+              <div class="docs-item"><strong>Quick Reference</strong> — A one-page cheat sheet Claude scans before any writing task.</div>
+              <div class="docs-item"><strong>Calibration Tests</strong> — Before/after samples to verify the skill is working correctly.</div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Build Your Own</p>
+            <div class="prompt-blocks">
+              <div class="prompt-block">
+                <p class="prompt-label">Run this on your sent emails</p>
+                <p class="prompt-text" id="voiceGuidePrompt">Pull my 40 most recent sent emails from Gmail. Read through all of them and analyze: my core tone and identity, the registers I use across different audiences, my sentence patterns and rhythm, my rhetorical moves, how I handle emotion, phrases I use and never use. Then write a structured voice guide with these 8 sections: Core Identity, Registers, Sentence Patterns, Rhetorical Moves, Emotional Register, Do&apos;s and Don&apos;ts, Quick Reference, and Calibration Tests. Save it as a humanize-writing skill so Claude can write in my voice on any future task.</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('voiceGuidePrompt', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+            </div>
+          </div>
+        </div>`
+      },
+
+      'Email Manager Scheduled Task': {
+        how: `<div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>Connected Gmail to Claude</h4>
+              <p>Set up the Gmail connector in Cowork — giving Claude direct access to read threads, search by label, and create drafts without ever opening a browser tab.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Built an email-manager skill that filters noise and prioritizes what matters</h4>
+              <p>Wrote a skill that tells Claude exactly how to triage: what counts as urgent, what to skip, which senders always need a reply, and how to surface the threads I actually need to act on.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Wired it to my voice guide skill so drafts sound like me</h4>
+              <p>The email-manager skill invokes my <code>humanize-writing</code> skill before drafting any reply — so every suggested response comes out in my voice, not generic AI-ese.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <h4>Wrapped it in a scheduled task that runs every morning</h4>
+              <p>Used the schedule skill to set a daily 8am task. Every morning I wake up to a triage summary and ready-to-send draft replies — no inbox dread, no blank page.</p>
+            </div>
+          </div>
+        </div>`,
+        docs: `<div class="portfolio-docs">
+          <div>
+            <p class="ds-section-title">The Skill + Scheduled Task Setup</p>
+            <div class="docs-list">
+              <div class="docs-item"><strong>Gmail connector</strong> — gives Claude read/draft access to your inbox without browser automation.</div>
+              <div class="docs-item"><strong>Email-manager skill</strong> — defines triage logic: urgency filters, sender rules, reply priority, and summary format.</div>
+              <div class="docs-item"><strong>humanize-writing skill integration</strong> — every draft passes through the voice guide before it's surfaced to you.</div>
+              <div class="docs-item"><strong>Scheduled task (daily 8am)</strong> — runs automatically; delivers a morning briefing with prioritized threads and pre-drafted replies.</div>
+              <div class="docs-item"><strong>Draft-only mode</strong> — Claude creates drafts in Gmail, never sends autonomously. You review and hit send.</div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Build Your Own</p>
+            <div class="prompt-blocks">
+              <div class="prompt-block">
+                <p class="prompt-label">Run this to set it up</p>
+                <p class="prompt-text" id="emailManagerPrompt">Connect my Gmail account. Then build me an email-manager skill that: pulls my unread and flagged emails each morning, filters out newsletters and noise, identifies the 3&ndash;5 threads that actually need my attention, and drafts replies using my voice guide skill. Once the skill works, wrap it in a scheduled task that runs every day at 8am and delivers a triage summary with draft replies ready to review.</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('emailManagerPrompt', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+            </div>
+          </div>
+        </div>`
+      },
+
+      'Spreadsheet Analysis': {
+        how: `<div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>Loaded a spreadsheet into Claude</h4>
+              <p>Dropped a real dataset directly into Cowork — no prep, no cleaning first. Let Claude see the raw file and form its own first impression before asking anything.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Asked for an overview and recommended computed columns</h4>
+              <p>Asked Claude to describe the dataset, flag any data quality issues, and suggest the most useful derived metrics — totals, ratios, averages — that weren't already in the file.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Had Claude write the formulas and run them</h4>
+              <p>Picked the computed columns I wanted and let Claude write all the formulas, add them to the sheet, and verify the math — no manual formula writing at any point.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <h4>Built two data visualizations directly in the sheet</h4>
+              <p>Asked Claude to recommend the two charts that would best surface the story in the data, then had it build them — selecting chart types, ranges, and labels without touching the chart editor.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-text">
+              <h4>Asked for the most interesting patterns and outliers</h4>
+              <p>With clean data and working charts, asked Claude to read the sheet like an analyst: what's surprising, what's missing, and what's worth investigating further. Got a short brief in plain language.</p>
+            </div>
+          </div>
+        </div>`,
+        docs: `<div class="portfolio-docs">
+          <div>
+            <p class="ds-section-title">The Dataset & Charts</p>
+            <div class="docs-list">
+              <div class="docs-item"><strong>Dataset</strong> — A real spreadsheet from the AI Builder program with multiple columns of mixed data types including text, numbers, and dates.</div>
+              <div class="docs-item"><strong>Chart 1 — Category breakdown</strong> — A bar chart showing distribution across the primary categorical column, making the composition of the dataset immediately visible.</div>
+              <div class="docs-item"><strong>Chart 2 — Trend over time</strong> — A line chart tracking the key numeric metric across time, surfacing growth patterns and dips that weren't obvious in the raw rows.</div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Prompt Chain — Run This on Any Spreadsheet</p>
+            <div class="prompt-blocks">
+              <div class="prompt-block">
+                <p class="prompt-label">Prompt 1 — First Look</p>
+                <p class="prompt-text" id="sheetPrompt1">Here's my spreadsheet. Give me a plain-language overview: what's in it, any data quality issues you notice, and the 3–5 computed columns that would be most useful to add.</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('sheetPrompt1', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+              <div class="prompt-block" style="margin-top:0.75rem;">
+                <p class="prompt-label">Prompt 2 — Build It Out</p>
+                <p class="prompt-text" id="sheetPrompt2">Add those columns to the sheet with working formulas. Then build two charts that best show the story in the data — pick the chart types, set the ranges, and label everything clearly.</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('sheetPrompt2', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+              <div class="prompt-block" style="margin-top:0.75rem;">
+                <p class="prompt-label">Prompt 3 — Insight Brief</p>
+                <p class="prompt-text" id="sheetPrompt3">Now read the data like an analyst. What are the 3 most interesting patterns or outliers? What's surprising, what's missing, and what would you investigate next?</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('sheetPrompt3', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+            </div>
+          </div>
+        </div>`
+      },
+
+      'Data Analysis Presentation': {
+        how: `<div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h4>Outlined the story with Claude before designing</h4>
+              <p>Before touching any design tool, asked Claude to help structure the narrative — what's the headline finding, what evidence supports it, and what order makes the argument land. Structure first, slides second.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h4>Built the deck in Cowork using my design skill</h4>
+              <p>Invoked <code>/l1-morning-design</code> and handed Claude the outline. It built the full slide deck — layouts, typography, color, and visuals — applying the design skill to keep everything on-brand and consistent.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h4>Exported and shared it</h4>
+              <p>Exported the finished deck as a shareable file — PDF, PowerPoint, or HTML depending on the audience. One session: data to polished deck, ready to send.</p>
+            </div>
+          </div>
+        </div>`,
+        docs: `<div class="portfolio-docs">
+          <div>
+            <p class="ds-section-title">The Outline & Design Choices</p>
+            <div class="docs-list">
+              <div class="docs-item"><strong>Opening slide</strong> — The single most surprising finding from the dataset, stated plainly. Sets the stakes before any context.</div>
+              <div class="docs-item"><strong>Context slide</strong> — What the dataset is, where it came from, and why it matters. One sentence per point.</div>
+              <div class="docs-item"><strong>Chart slides (×2)</strong> — One slide per chart from the spreadsheet analysis, each with a headline that states the insight — not just the chart title.</div>
+              <div class="docs-item"><strong>Patterns slide</strong> — The 3 most interesting findings from the analysis brief, in plain language.</div>
+              <div class="docs-item"><strong>What's next slide</strong> — Open questions and next steps. Gives the deck a clear ending without overpromising.</div>
+              <div class="docs-item"><strong>Design: dark backgrounds</strong> — Ink palette for high-contrast data slides so charts pop without extra styling.</div>
+              <div class="docs-item"><strong>Design: one font, two weights</strong> — DM Sans throughout; heavy for headlines, regular for body. Clean and consistent.</div>
+              <div class="docs-item"><strong>Design: orange as the signal color</strong> — Only the most important data point per chart gets the orange highlight. Everything else recedes.</div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Prompt — Data to Deck in One Session</p>
+            <div class="prompt-blocks">
+              <div class="prompt-block">
+                <p class="prompt-label">Prompt 1 — Build the Outline</p>
+                <p class="prompt-text" id="deckPrompt1">Here are the findings from my spreadsheet analysis: [paste your insight brief]. Help me outline a 5–6 slide deck that tells the story clearly. Lead with the most surprising finding. Each slide gets a one-sentence headline that states the insight, not just the topic.</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('deckPrompt1', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+              <div class="prompt-block" style="margin-top:0.75rem;">
+                <p class="prompt-label">Prompt 2 — Build the Deck</p>
+                <p class="prompt-text" id="deckPrompt2">Read my /l1-morning-design skill, then build this slide deck using that design system. Use the outline above. Apply the dark ink palette for data slides, DM Sans for all type, and orange only for the single most important data point per slide. Export as a shareable file when done.</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('deckPrompt2', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+            </div>
+          </div>
+        </div>`
+      },
+
+      'File Organization Process': {
+        how: `<div class="ds-doc">
+          <div>
+            <p class="ds-section-title">The Folder Tree I Landed On</p>
+            <div style="background:var(--ink);padding:1.25rem 1.5rem;border-left:3px solid var(--orange);font-family:monospace;font-size:0.82rem;color:rgba(255,255,255,0.85);line-height:2;">
+              📁 Samara/<br>
+              ├── 📁 Work/<br>
+              │&nbsp;&nbsp;&nbsp;├── 📁 Active Projects/<br>
+              │&nbsp;&nbsp;&nbsp;├── 📁 Archive/<br>
+              │&nbsp;&nbsp;&nbsp;└── 📁 Templates/<br>
+              ├── 📁 AI Builder/<br>
+              │&nbsp;&nbsp;&nbsp;├── 📁 Projects/<br>
+              │&nbsp;&nbsp;&nbsp;├── 📁 Skills/<br>
+              │&nbsp;&nbsp;&nbsp;└── 📁 Assets/<br>
+              ├── 📁 Personal/<br>
+              │&nbsp;&nbsp;&nbsp;├── 📁 Finance/<br>
+              │&nbsp;&nbsp;&nbsp;└── 📁 Health/<br>
+              └── 📁 Inbox/ <span style="color:var(--orange);">← everything lands here first</span>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">The 3 Principles I Optimized For</p>
+            <div class="layout-principles">
+              <div class="principle"><span><strong>Organize by intent, not file type.</strong> Folders map to how I use things — not what format they're in. A PDF and a note about the same project live together.</span></div>
+              <div class="principle"><span><strong>Max 2–3 levels deep.</strong> Nothing buried so far that I forget it exists. If I can't find a file in 3 clicks, the system has failed.</span></div>
+              <div class="principle"><span><strong>Inbox-first, then triage.</strong> Everything new drops into Inbox. I sort on a schedule, not in the moment — so the rest of the system stays clean.</span></div>
+            </div>
+          </div>
+        </div>`,
+        docs: `<div class="portfolio-docs">
+          <div>
+            <p class="ds-section-title">Before &amp; After</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div>
+                <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--stone);margin-bottom:0.5rem;">Before</p>
+                <div style="background:var(--linen);padding:0.9rem;font-family:monospace;font-size:0.78rem;color:var(--stone);line-height:2;border:1px solid var(--taupe);">
+                  Downloads/ (418 files)<br>
+                  Desktop/ (scattered)<br>
+                  Documents/<br>
+                  &nbsp;&nbsp;old stuff/<br>
+                  &nbsp;&nbsp;2023/<br>
+                  &nbsp;&nbsp;2024/<br>
+                  &nbsp;&nbsp;misc/
+                </div>
+              </div>
+              <div>
+                <p style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#4a9e25;margin-bottom:0.5rem;">After</p>
+                <div style="background:rgba(127,216,82,0.06);border:1px solid rgba(127,216,82,0.25);padding:0.9rem;font-family:monospace;font-size:0.78rem;color:var(--stone);line-height:2;">
+                  Work/Active Projects/<br>
+                  Work/Archive/<br>
+                  AI Builder/Projects/<br>
+                  AI Builder/Skills/<br>
+                  Personal/Finance/<br>
+                  Inbox/ ← new home
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Prompt — Audit &amp; Reorganize Any Messy Folder</p>
+            <div class="prompt-blocks">
+              <div class="prompt-block">
+                <p class="prompt-label">Run This</p>
+                <p class="prompt-text" id="fileOrgPrompt">I want to redesign how I organize my files. First, ask me: what folders do I have now, what do I use regularly vs. never touch, and how do I naturally think about my work? Then design a folder structure with a max of 3 levels deep, organized by how I actually work — not by file type or year. Give me the folder tree and explain the logic behind every top-level folder.</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('fileOrgPrompt', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+            </div>
+          </div>
+        </div>`
+      },
+
+      'AI Context File': {
+        how: `<div class="ds-doc">
+          <div>
+            <p class="ds-section-title">The 6 Sections of My Context File</p>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+              <div style="padding:0.85rem 1rem;background:var(--off-white);border-left:3px solid var(--orange);">
+                <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--orange);margin-bottom:0.25rem;">About Me</p>
+                <p style="font-size:0.845rem;color:var(--stone);line-height:1.55;">Name, role, and a one-liner on what I do. Sets the baseline so the AI knows who it's talking to.</p>
+              </div>
+              <div style="padding:0.85rem 1rem;background:var(--off-white);border-left:3px solid var(--orange);">
+                <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--orange);margin-bottom:0.25rem;">Goals (This Quarter)</p>
+                <p style="font-size:0.845rem;color:var(--stone);line-height:1.55;">My 2–3 current priorities. Keeps every response focused on what matters now, not six months ago.</p>
+              </div>
+              <div style="padding:0.85rem 1rem;background:var(--off-white);border-left:3px solid var(--orange);">
+                <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--orange);margin-bottom:0.25rem;">How I Like AI to Respond</p>
+                <p style="font-size:0.845rem;color:var(--stone);line-height:1.55;">Format, length, and tone preferences. Eliminates the need to re-explain communication style every session.</p>
+              </div>
+              <div style="padding:0.85rem 1rem;background:var(--off-white);border-left:3px solid var(--orange);">
+                <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--orange);margin-bottom:0.25rem;">Rules</p>
+                <p style="font-size:0.845rem;color:var(--stone);line-height:1.55;">Hard constraints that apply every time. The AI reads these as non-negotiables before doing anything.</p>
+              </div>
+              <div style="padding:0.85rem 1rem;background:var(--off-white);border-left:3px solid var(--orange);">
+                <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--orange);margin-bottom:0.25rem;">Tools</p>
+                <p style="font-size:0.845rem;color:var(--stone);line-height:1.55;">My daily stack. Helps the AI give practical advice instead of recommending things I don't use.</p>
+              </div>
+              <div style="padding:0.85rem 1rem;background:var(--off-white);border-left:3px solid var(--orange);">
+                <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--orange);margin-bottom:0.25rem;">Key Files</p>
+                <p style="font-size:0.845rem;color:var(--stone);line-height:1.55;">Where my important files live. Removes the "where is X?" friction from every session.</p>
+              </div>
+            </div>
+          </div>
+        </div>`,
+        docs: `<div class="portfolio-docs">
+          <div>
+            <p class="ds-section-title">What Each Section Does &amp; Why It Matters</p>
+            <div class="docs-list">
+              <div class="docs-item"><strong>About Me</strong> — Without this, the AI has no frame of reference. Name and role set the calibration baseline for every response.</div>
+              <div class="docs-item"><strong>Goals</strong> — Time-bound priorities prevent generically correct but contextually irrelevant advice. "This quarter" forces you to keep it updated.</div>
+              <div class="docs-item"><strong>How I Like AI to Respond</strong> — The single biggest quality-of-life improvement. Stops you from editing every response for format and length.</div>
+              <div class="docs-item"><strong>Rules</strong> — Non-negotiables catch failure modes before they happen. "Always ask before deleting files" exists because once is enough to learn that lesson.</div>
+              <div class="docs-item"><strong>Tools</strong> — Practical specificity. An AI that knows your stack gives you Slack-ready copy, not generic advice that needs to be adapted.</div>
+              <div class="docs-item"><strong>Key Files</strong> — The difference between handing over a path once vs. copy-pasting it in every session.</div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Starter Template — Copy &amp; Fill In</p>
+            <div class="prompt-blocks">
+              <div class="prompt-block">
+                <p class="prompt-label">Your Context File</p>
+                <p class="prompt-text" id="contextFileTemplate">**About Me**
+[Your name]. I work in [role] — [one sentence on what you do].
+
+**Goals (This Quarter)**
+1. [Goal 1]
+2. [Goal 2]
+3. [Goal 3]
+
+**How I Like AI to Respond**
+[Short and direct / step-by-step / long-form / etc.] No [filler / preamble / bullet points / etc.]
+
+**Rules**
+- Always ask before [X]
+- Never [Y]
+- [Any hard constraint]
+
+**Tools**
+[List the tools you use every day]
+
+**Key Files**
+[Describe where your important files live]</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('contextFileTemplate', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Template
+              </button>
+            </div>
+          </div>
+        </div>`
+      },
+
+      'Skills Library': {
+        how: `<div class="ds-doc">
+          <div>
+            <p class="ds-section-title">Every Skill in the Library (19 Total)</p>
+            <div style="display:flex;flex-direction:column;gap:0.35rem;">
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">l1-morning-design</span><span style="font-size:0.845rem;color:var(--stone);">Applies ThreadBeast's design aesthetic — every build gets the same colors, fonts, and feel</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">email-manager</span><span style="font-size:0.845rem;color:var(--stone);">Triages inbox, filters noise, and drafts replies in my voice using my voice guide</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">humanize-writing</span><span style="font-size:0.845rem;color:var(--stone);">Strips AI tells from writing and produces prose that sounds like I actually wrote it</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">competitive-brief</span><span style="font-size:0.845rem;color:var(--stone);">Researches competitors and outputs a structured positioning comparison with gaps and threats</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">docx</span><span style="font-size:0.845rem;color:var(--stone);">Creates and edits Word documents with proper formatting, tables of contents, and headings</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">pdf</span><span style="font-size:0.845rem;color:var(--stone);">Extracts, merges, splits, and creates PDF files with full page control</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">pptx</span><span style="font-size:0.845rem;color:var(--stone);">Builds and edits slide decks end-to-end — layouts, content, speaker notes, and exports</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">xlsx</span><span style="font-size:0.845rem;color:var(--stone);">Creates, edits, and analyzes spreadsheets — formulas, charts, and data cleaning included</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">schedule</span><span style="font-size:0.845rem;color:var(--stone);">Creates recurring tasks that run automatically on a cron schedule without manual triggering</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">skill-creator</span><span style="font-size:0.845rem;color:var(--stone);">Meta-skill for building, testing, and refining other skills — including performance benchmarking</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">setup-cowork</span><span style="font-size:0.845rem;color:var(--stone);">Guided setup skill for installing role-matched plugins and connecting tools to Cowork</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">marketing:brand-review</span><span style="font-size:0.845rem;color:var(--stone);">Reviews content against brand voice and flags deviations with severity ratings and fixes</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">marketing:campaign-plan</span><span style="font-size:0.845rem;color:var(--stone);">Generates a full campaign brief with audience, messaging, channel strategy, and calendar</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">marketing:competitive-brief</span><span style="font-size:0.845rem;color:var(--stone);">Builds positioning battlecards with messaging comparison and unclaimed content angles</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">marketing:content-creation</span><span style="font-size:0.845rem;color:var(--stone);">Drafts marketing content across channels — blog, social, email, landing pages, press releases</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">marketing:draft-content</span><span style="font-size:0.845rem;color:var(--stone);">Drafts channel-specific content with headline options, SEO recommendations, and CTAs</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">marketing:email-sequence</span><span style="font-size:0.845rem;color:var(--stone);">Designs multi-email sequences with full copy, timing, branching logic, and exit conditions</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">marketing:performance-report</span><span style="font-size:0.845rem;color:var(--stone);">Builds performance reports with trend analysis, wins/misses, and next-period priorities</span></div>
+              <div style="display:flex;gap:0.75rem;align-items:flex-start;padding:0.6rem 0.85rem;background:var(--off-white);"><span style="color:var(--orange);font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:185px;padding-top:0.1rem;">marketing:seo-audit</span><span style="font-size:0.845rem;color:var(--stone);">Runs a full SEO audit — keyword research, content gaps, technical checks, competitor comparison</span></div>
+            </div>
+          </div>
+        </div>`,
+        docs: `<div class="portfolio-docs">
+          <div>
+            <p class="ds-section-title">Built From Scratch</p>
+            <div class="docs-list">
+              <div class="docs-item"><strong>l1-morning-design</strong> — Extracted the design DNA from a real site and turned it into a reusable skill. Any build that invokes it gets the same aesthetic automatically.</div>
+              <div class="docs-item"><strong>email-manager</strong> — Custom triage logic, sender priority rules, and voice guide integration. Drafts sound like me, not generic AI copy.</div>
+              <div class="docs-item"><strong>humanize-writing</strong> — Built from 40 sent emails analyzed for tone, rhythm, and rhetorical patterns. It knows how I actually write — not just how I want to write.</div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Installed From a Marketplace</p>
+            <div class="docs-list">
+              <div class="docs-item"><strong>competitive-brief</strong> — Structured competitor analysis with positioning comparison and actionable recommendations. Plug and play.</div>
+              <div class="docs-item"><strong>docx / pdf / pptx / xlsx</strong> — Office suite skills. Creates and edits Word docs, PDFs, decks, and spreadsheets directly from Cowork.</div>
+              <div class="docs-item"><strong>schedule</strong> — Wraps any task in a cron trigger. Turned my email-manager into a daily 8am briefing with one command.</div>
+              <div class="docs-item"><strong>skill-creator</strong> — Meta-skill for building and improving other skills. Used it to create and iterate on l1-morning-design and humanize-writing.</div>
+              <div class="docs-item"><strong>marketing:* suite (7 skills)</strong> — Covers brand review, campaign planning, content drafting, email sequences, SEO audits, and performance reporting.</div>
+            </div>
+          </div>
+          <div>
+            <p class="ds-section-title">Build Your Own Skill Library</p>
+            <div class="prompt-blocks">
+              <div class="prompt-block">
+                <p class="prompt-label">Get Skill Recommendations</p>
+                <p class="prompt-text" id="skillsLibPrompt">Based on the work I do, what skills do you think I should create? My role: [your role]. I work on: [types of tasks]. My biggest time sinks are: [X, Y, Z]. What repeating workflows would benefit most from a dedicated skill?</p>
+              </div>
+              <button class="project-link" style="margin-top:0.5rem;" onclick="copyPrompt('skillsLibPrompt', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Prompt
+              </button>
+            </div>
+          </div>
+        </div>`
+      }
+
+
+    };
+
+    // ── EMPTY STATE ────────────────────────────────────────────
+    const emptyHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🚧</div>
+        <p class="empty-text">Content coming soon</p>
+        <p class="empty-sub">Check back as this project gets built out.</p>
+      </div>`;
+
+    // ── PROJECT DATA ───────────────────────────────────────────
+    const projects = [
+      { title: 'Design System Skill',           built: true,  desc: 'A reusable skill for generating consistent design systems — extracted from a real site and usable across every build.' },
+      { title: 'Portfolio Website',             built: true,  desc: 'This site — a single self-contained HTML portfolio built, styled, and iterated with AI.' },
+      { title: 'Voice Guide Skill',             built: true,  desc: 'A psychological profile of how I write, turned into an AI skill any tool can use.' },
+      { title: 'Email Manager Scheduled Task',  built: true,  desc: 'A scheduled task that triages my inbox every morning and drafts replies in my voice.' },
+      { title: 'Custom Workflow',               built: false, desc: 'A multi-step AI workflow designed for a specific repeating process.' },
+      { title: 'Spreadsheet Analysis',          built: true,  desc: 'Used Claude to clean, calculate, visualize, and surface insights from a real dataset — no formulas required.' },
+      { title: 'Data Analysis Presentation',    built: true,  desc: 'Took a raw dataset and shipped a polished, shareable slide deck — all in one session.' },
+      { title: 'File Organization Process',     built: true,  desc: 'Used AI to audit my files and design an organization system that actually fits how I work.' },
+      { title: 'AI Context File',               built: true,  desc: 'A persistent context file that teaches my AI tool who I am, what I do, and how I work — loaded into every chat automatically.' },
+      { title: 'Skills Library',                built: true,  desc: 'A library of the AI skills I built or installed that turn one-off prompts into repeatable workflows.' },
+    ];
+
+    // ── RENDER GRID ────────────────────────────────────────────
+    const grid = document.getElementById('projectsGrid');
+
+    projects.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.innerHTML = `
+        <div class="project-card-header">
+          <h3>${p.title}</h3>
+          <span class="project-tag ${p.built ? 'tag-built' : 'tag-coming'}">${p.built ? 'Built' : 'Coming Soon'}</span>
+        </div>
+        <p>${p.desc}</p>
+        <div class="project-links">
+          <button class="project-link" onclick="openModal('${esc(p.title)}','how')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            How I Built This
+          </button>
+          <button class="project-link" onclick="openModal('${esc(p.title)}','docs')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Documentation
+          </button>
+        </div>`;
+      grid.appendChild(card);
+    });
+
+    function esc(s) { return s.replace(/'/g, "\\'"); }
+
+    // ── MODAL ──────────────────────────────────────────────────
+    function openModal(title, type) {
+      const c = content[title];
+      const key = type === 'how' ? 'how' : 'docs';
+      document.getElementById('modalType').textContent  = type === 'how' ? 'How I Built This' : 'Documentation';
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').innerHTML    = (c && c[key]) ? c[key] : emptyHTML;
+      document.getElementById('modalBody').scrollTop   = 0;
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    function copyPrompt(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const prev = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+        setTimeout(() => { btn.innerHTML = prev; }, 2000);
+      });
+    }
+
+  
+  </script>
+</body>
+</html>
